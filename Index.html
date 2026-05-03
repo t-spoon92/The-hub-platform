@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAB AI Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CC0000;
+    --red-dark: #990000;
+    --red-light: #ff1a1a;
+    --black: #111111;
+    --gray-900: #1a1a1a;
+    --gray-800: #2a2a2a;
+    --gray-600: #555555;
+    --gray-400: #999999;
+    --gray-200: #e8e8e8;
+    --gray-100: #f4f4f4;
+    --white: #ffffff;
+    --amber: #D4760A;
+    --amber-light: #FFF3CD;
+    --blue: #1D6FA4;
+    --green: #2E7D52;
+    --purple: #6B3D9A;
+    --pink: #C2185B;
+    --nav-h: 64px;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: var(–white);
+color: var(–black);
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* ── TOP NAV ── */
+.topnav {
+position: fixed;
+top: 0; left: 0; right: 0;
+height: var(–nav-h);
+background: var(–black);
+display: flex;
+align-items: center;
+padding: 0 2rem;
+gap: 0;
+z-index: 1000;
+border-bottom: 3px solid var(–red);
+}
+
+.nav-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+margin-right: 2.5rem;
+text-decoration: none;
+}
+
+.nav-logo-mark {
+width: 36px; height: 36px;
+background: var(–red);
+display: flex; align-items: center; justify-content: center;
+font-family: ‘DM Serif Display’, serif;
+font-size: 1.1rem;
+color: white;
+font-weight: 400;
+flex-shrink: 0;
+}
+
+.nav-logo-text {
+font-size: 0.85rem;
+font-weight: 600;
+color: white;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+line-height: 1.2;
+}
+
+.nav-logo-sub {
+font-size: 0.65rem;
+color: var(–gray-400);
+font-weight: 400;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+}
+
+.nav-links {
+display: flex;
+align-items: center;
+gap: 0;
+flex: 1;
+height: 100%;
+}
+
+.nav-link {
+height: 100%;
+display: flex;
+align-items: center;
+padding: 0 1.1rem;
+font-size: 0.82rem;
+font-weight: 500;
+color: var(–gray-400);
+text-decoration: none;
+cursor: pointer;
+transition: color 0.2s, background 0.2s;
+white-space: nowrap;
+letter-spacing: 0.02em;
+border-bottom: 3px solid transparent;
+margin-bottom: -3px;
+position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+color: white;
+border-bottom-color: var(–red);
+}
+
+.nav-link[data-color=“blue”]:hover, .nav-link[data-color=“blue”].active { border-bottom-color: var(–blue); color: white; }
+.nav-link[data-color=“green”]:hover, .nav-link[data-color=“green”].active { border-bottom-color: var(–green); color: white; }
+.nav-link[data-color=“purple”]:hover, .nav-link[data-color=“purple”].active { border-bottom-color: var(–purple); color: white; }
+.nav-link[data-color=“amber”]:hover, .nav-link[data-color=“amber”].active { border-bottom-color: var(–amber); color: white; }
+.nav-link[data-color=“pink”]:hover, .nav-link[data-color=“pink”].active { border-bottom-color: var(–pink); color: white; }
+
+.nav-search {
+margin-left: auto;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+background: var(–gray-900);
+border: 1px solid var(–gray-800);
+border-radius: 6px;
+padding: 0.4rem 0.85rem;
+cursor: text;
+transition: border-color 0.2s;
+min-width: 200px;
+}
+
+.nav-search:hover { border-color: var(–gray-600); }
+.nav-search:focus-within { border-color: var(–red); }
+
+.nav-search input {
+background: none;
+border: none;
+outline: none;
+color: white;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 0.82rem;
+width: 100%;
+}
+
+.nav-search input::placeholder { color: var(–gray-600); }
+
+.search-icon { color: var(–gray-600); font-size: 0.9rem; }
+
+/* ── PAGES ── */
+.page { display: none; padding-top: var(–nav-h); min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+background: var(–black);
+padding: 5rem 2rem 4rem;
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 4px;
+background: var(–red);
+}
+
+.hero-grid {
+position: absolute;
+inset: 0;
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+background-size: 60px 60px;
+pointer-events: none;
+}
+
+.hero-content {
+max-width: 1100px;
+margin: 0 auto;
+position: relative;
+z-index: 1;
+}
+
+.hero-eyebrow {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–red);
+margin-bottom: 1.25rem;
+}
+
+.hero-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: clamp(2.5rem, 5vw, 4rem);
+color: white;
+line-height: 1.1;
+margin-bottom: 1.25rem;
+max-width: 700px;
+}
+
+.hero-title em {
+font-style: italic;
+color: var(–red);
+}
+
+.hero-sub {
+font-size: 1.05rem;
+color: var(–gray-400);
+max-width: 580px;
+line-height: 1.6;
+margin-bottom: 3rem;
+}
+
+.hero-prompt {
+font-size: 0.85rem;
+font-weight: 600;
+color: var(–gray-400);
+letter-spacing: 0.08em;
+text-transform: uppercase;
+margin-bottom: 1.25rem;
+}
+
+.persona-tiles {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 0.85rem;
+max-width: 1000px;
+}
+
+.persona-tile {
+background: var(–gray-900);
+border: 1px solid var(–gray-800);
+border-radius: 10px;
+padding: 1.4rem 1rem;
+cursor: pointer;
+transition: all 0.25s ease;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.persona-tile::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: var(–tile-color, var(–red));
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.25s ease;
+}
+
+.persona-tile:hover::before { transform: scaleX(1); }
+.persona-tile:hover {
+border-color: var(–tile-color, var(–red));
+background: var(–gray-800);
+transform: translateY(-3px);
+box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.persona-tile.coming-soon { opacity: 0.5; cursor: default; }
+.persona-tile.coming-soon:hover { transform: none; border-color: var(–gray-800); background: var(–gray-900); }
+
+.tile-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.tile-label {
+font-size: 0.82rem;
+font-weight: 600;
+color: white;
+line-height: 1.3;
+margin-bottom: 0.35rem;
+}
+.tile-sub {
+font-size: 0.7rem;
+color: var(–gray-600);
+line-height: 1.4;
+}
+.tile-badge {
+display: inline-block;
+margin-top: 0.5rem;
+font-size: 0.6rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+background: var(–gray-800);
+color: var(–gray-400);
+padding: 0.2rem 0.5rem;
+border-radius: 20px;
+}
+
+/* ── SECTION PAGES ── */
+.section-hero {
+padding: 3rem 2rem 2.5rem;
+position: relative;
+border-bottom: 1px solid var(–gray-200);
+}
+
+.section-hero::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 4px;
+}
+
+.section-hero.blue::before { background: var(–blue); }
+.section-hero.green::before { background: var(–green); }
+.section-hero.purple::before { background: var(–purple); }
+.section-hero.amber::before { background: var(–amber); }
+.section-hero.pink::before { background: var(–pink); }
+.section-hero.red::before { background: var(–red); }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-eyebrow {
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+}
+
+.section-eyebrow.blue { color: var(–blue); }
+.section-eyebrow.green { color: var(–green); }
+.section-eyebrow.purple { color: var(–purple); }
+.section-eyebrow.amber { color: var(–amber); }
+.section-eyebrow.pink { color: var(–pink); }
+.section-eyebrow.red { color: var(–red); }
+
+.section-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 2.2rem;
+color: var(–black);
+margin-bottom: 0.5rem;
+}
+
+.section-desc {
+font-size: 0.95rem;
+color: var(–gray-600);
+max-width: 650px;
+line-height: 1.6;
+}
+
+.section-body {
+padding: 2.5rem 2rem;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+/* ── CONTENT GRID ── */
+.content-cols {
+display: grid;
+gap: 1.5rem;
+margin-bottom: 2.5rem;
+}
+
+.content-cols.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.content-cols.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.content-cols.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.content-col { display: flex; flex-direction: column; gap: 0; }
+
+.col-header {
+padding: 0.85rem 1rem;
+border-radius: 8px 8px 0 0;
+color: white;
+font-size: 0.85rem;
+font-weight: 600;
+}
+
+.col-header.blue { background: var(–blue); }
+.col-header.green { background: var(–green); }
+.col-header.purple { background: var(–purple); }
+.col-header.amber { background: var(–amber); }
+.col-header.pink { background: var(–pink); }
+.col-header.red { background: var(–red); }
+.col-header.blue-2 { background: #155a87; }
+.col-header.amber-2 { background: #B05A00; }
+
+.col-item {
+display: flex;
+align-items: center;
+padding: 0.75rem 1rem;
+background: var(–gray-100);
+border: 1px solid var(–gray-200);
+border-top: none;
+gap: 0.75rem;
+cursor: pointer;
+transition: background 0.15s;
+text-decoration: none;
+color: inherit;
+}
+
+.col-item:last-child { border-radius: 0 0 8px 8px; }
+
+.col-item:hover { background: var(–gray-200); }
+
+.col-item.risk-item {
+background: #FFF8E1;
+border-color: #E8C84A;
+}
+.col-item.risk-item:hover { background: #FFF0B0; }
+
+.item-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+flex-shrink: 0;
+}
+
+.item-dot.blue { background: var(–blue); }
+.item-dot.green { background: var(–green); }
+.item-dot.purple { background: var(–purple); }
+.item-dot.amber { background: var(–amber); }
+.item-dot.pink { background: var(–pink); }
+.item-dot.red { background: var(–red); }
+.item-dot.blue-2 { background: #155a87; }
+.item-dot.amber-2 { background: #B05A00; }
+
+.item-text {
+font-size: 0.875rem;
+color: var(–gray-800);
+flex: 1;
+line-height: 1.35;
+}
+
+.item-text.risk-text { color: #7A5200; font-weight: 500; }
+
+.item-arrow {
+color: var(–gray-400);
+font-size: 0.75rem;
+opacity: 0;
+transition: opacity 0.15s, transform 0.15s;
+}
+
+.col-item:hover .item-arrow { opacity: 1; transform: translateX(3px); }
+
+/* ── RISK CALLOUT ── */
+.risk-callout {
+background: var(–amber-light);
+border: 1.5px solid var(–amber);
+border-radius: 10px;
+padding: 1.1rem 1.35rem;
+display: flex;
+gap: 1rem;
+align-items: flex-start;
+margin-bottom: 2rem;
+}
+
+.risk-callout-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+.risk-callout-body { flex: 1; }
+.risk-callout-title { font-size: 0.82rem; font-weight: 700; color: var(–amber); margin-bottom: 0.3rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.risk-callout-text { font-size: 0.9rem; color: #6B4400; line-height: 1.5; }
+
+/* ── INFO BANNER ── */
+.info-banner {
+background: var(–black);
+color: white;
+padding: 1rem 1.35rem;
+border-radius: 10px;
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-bottom: 2rem;
+font-size: 0.9rem;
+}
+
+.info-banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+.info-banner strong { color: white; }
+
+/* ── PERSONA PAGE ── */
+.persona-hero {
+background: var(–black);
+padding: 3rem 2rem 2.5rem;
+border-bottom: 4px solid var(–red);
+}
+
+.persona-hero-inner {
+max-width: 1100px;
+margin: 0 auto;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 2rem;
+}
+
+.persona-hero-title {
+font-family: ‘DM Serif Display’, serif;
+font-size: 2rem;
+color: white;
+margin-bottom: 0.5rem;
+}
+
+.persona-hero-sub {
+font-size: 0.9rem;
+color: var(–gray-400);
+max-width: 500px;
+line-height: 1.5;
+}
+
+.also-relevant {
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+flex-shrink: 0;
+align-items: flex-end;
+}
+
+.also-relevant-label {
+font-size: 0.65rem;
+color: var(–gray-600);
+text-transform: uppercase;
+letter-spacing: 0.1em;
+font-weight: 600;
+}
+
+.also-relevant-links { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+
+.also-relevant-link {
+font-size: 0.72rem;
+color: var(–gray-400);
+border: 1px solid var(–gray-800);
+padding: 0.25rem 0.65rem;
+border-radius: 20px;
+cursor: pointer;
+transition: all 0.2s;
+white-space: nowrap;
+}
+
+.also-relevant-link:hover {
+color: white;
+border-color: var(–red);
+background: rgba(204,0,0,0.1);
+}
+
+.persona-zones {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.25rem;
+}
+
+.persona-zone {
+border-radius: 10px;
+overflow: hidden;
+border: 1px solid var(–gray-200);
+box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.zone-header {
+padding: 0.85rem 1rem;
+color: white;
+font-size: 0.85rem;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.zone-body {
+padding: 1rem;
+background: var(–gray-100);
+min-height: 100px;
+}
+
+.zone-body p {
+font-size: 0.875rem;
+color: var(–gray-600);
+line-height: 1.55;
+margin-bottom: 0.75rem;
+}
+
+.zone-link {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+font-size: 0.8rem;
+font-weight: 600;
+text-decoration: none;
+padding: 0.4rem 0.85rem;
+border-radius: 5px;
+cursor: pointer;
+transition: opacity 0.2s;
+margin-top: 0.25rem;
+}
+.zone-link:hover { opacity: 0.8; }
+.zone-link.blue { background: rgba(29,111,164,0.12); color: var(–blue); }
+.zone-link.green { background: rgba(46,125,82,0.12); color: var(–green); }
+.zone-link.purple { background: rgba(107,61,154,0.12); color: var(–purple); }
+.zone-link.amber { background: rgba(212,118,10,0.12); color: var(–amber); }
+.zone-link.pink { background: rgba(194,24,91,0.12); color: var(–pink); }
+.zone-link.red { background: rgba(204,0,0,0.1); color: var(–red); }
+
+/* ── BACK BUTTON ── */
+.back-btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+font-size: 0.8rem;
+font-weight: 600;
+color: var(–gray-600);
+cursor: pointer;
+padding: 0.5rem 0;
+margin-bottom: 1.5rem;
+text-decoration: none;
+transition: color 0.2s;
+}
+.back-btn:hover { color: var(–red); }
+
+/* ── HOMEPAGE BOTTOM ── */
+.home-sections {
+background: var(–gray-100);
+padding: 3rem 2rem;
+border-top: 1px solid var(–gray-200);
+}
+
+.home-sections-inner { max-width: 1100px; margin: 0 auto; }
+
+.home-sections-title {
+font-size: 0.75rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–gray-400);
+margin-bottom: 1.5rem;
+}
+
+.section-cards {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 0.85rem;
+}
+
+.section-card {
+background: white;
+border-radius: 10px;
+overflow: hidden;
+cursor: pointer;
+transition: all 0.2s;
+border: 1px solid var(–gray-200);
+box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.section-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.section-card-bar { height: 5px; }
+.section-card-bar.blue { background: var(–blue); }
+.section-card-bar.green { background: var(–green); }
+.section-card-bar.purple { background: var(–purple); }
+.section-card-bar.amber { background: var(–amber); }
+.section-card-bar.pink { background: var(–pink); }
+
+.section-card-body { padding: 1rem; }
+
+.section-card-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.section-card-name { font-size: 0.9rem; font-weight: 700; color: var(–black); margin-bottom: 0.35rem; }
+.section-card-desc { font-size: 0.75rem; color: var(–gray-600); line-height: 1.45; }
+
+/* ── SEARCH RESULTS ── */
+.search-overlay {
+display: none;
+position: fixed;
+top: var(–nav-h);
+left: 0; right: 0;
+background: rgba(0,0,0,0.85);
+z-index: 999;
+padding: 2rem;
+max-height: calc(100vh - var(–nav-h));
+overflow-y: auto;
+}
+
+.search-overlay.visible { display: block; }
+
+.search-results {
+max-width: 700px;
+margin: 0 auto;
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.search-results-header {
+padding: 1rem 1.5rem;
+background: var(–gray-100);
+border-bottom: 1px solid var(–gray-200);
+font-size: 0.8rem;
+color: var(–gray-600);
+font-weight: 500;
+}
+
+.search-result-item {
+padding: 0.9rem 1.5rem;
+border-bottom: 1px solid var(–gray-100);
+cursor: pointer;
+transition: background 0.15s;
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.search-result-item:hover { background: var(–gray-100); }
+
+.result-icon {
+width: 32px; height: 32px;
+border-radius: 6px;
+display: flex; align-items: center; justify-content: center;
+font-size: 0.9rem;
+flex-shrink: 0;
+}
+
+.result-title { font-size: 0.9rem; font-weight: 600; color: var(–black); }
+.result-section { font-size: 0.72rem; color: var(–gray-400); margin-top: 0.1rem; }
+
+/* ── TABS ── */
+.tabs {
+display: flex;
+gap: 0;
+border-bottom: 2px solid var(–gray-200);
+margin-bottom: 2rem;
+}
+
+.tab {
+padding: 0.75rem 1.25rem;
+font-size: 0.85rem;
+font-weight: 500;
+color: var(–gray-600);
+cursor: pointer;
+border-bottom: 2px solid transparent;
+margin-bottom: -2px;
+transition: all 0.2s;
+white-space: nowrap;
+}
+
+.tab.active { color: var(–black); font-weight: 600; }
+.tab.active.blue { border-bottom-color: var(–blue); color: var(–blue); }
+.tab.active.purple { border-bottom-color: var(–purple); color: var(–purple); }
+.tab:hover { color: var(–black); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── FORM ELEMENTS ── */
+.form-group { margin-bottom: 1.25rem; }
+.form-label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(–gray-800); }
+.form-input, .form-select, .form-textarea {
+width: 100%;
+padding: 0.65rem 0.9rem;
+border: 1.5px solid var(–gray-200);
+border-radius: 7px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 0.875rem;
+color: var(–black);
+transition: border-color 0.2s;
+background: white;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+outline: none;
+border-color: var(–purple);
+}
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.65rem 1.35rem;
+border-radius: 7px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 0.875rem;
+font-weight: 600;
+cursor: pointer;
+border: none;
+transition: all 0.2s;
+}
+
+.btn-primary { background: var(–red); color: white; }
+.btn-primary:hover { background: var(–red-dark); }
+.btn-purple { background: var(–purple); color: white; }
+.btn-purple:hover { background: #5a2d85; }
+
+/* ── GRID CARDS ── */
+.use-case-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 1.25rem;
+margin-bottom: 2rem;
+}
+
+.use-case-card {
+background: white;
+border: 1px solid var(–gray-200);
+border-radius: 10px;
+overflow: hidden;
+cursor: pointer;
+transition: all 0.2s;
+box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.use-case-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+border-color: var(–purple);
+}
+
+.uc-bar { height: 4px; background: var(–purple); }
+.uc-body { padding: 1.1rem; }
+.uc-persona { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(–gray-400); margin-bottom: 0.4rem; }
+.uc-title { font-size: 0.9rem; font-weight: 700; color: var(–black); margin-bottom: 0.4rem; line-height: 1.3; }
+.uc-desc { font-size: 0.8rem; color: var(–gray-600); line-height: 1.45; margin-bottom: 0.75rem; }
+.uc-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.uc-tag { font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 20px; font-weight: 600; }
+.uc-tag.tool { background: rgba(29,111,164,0.1); color: var(–blue); }
+.uc-tag.risk { background: var(–amber-light); color: var(–amber); }
+
+/* ── EVENT CARDS ── */
+.event-list { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem; }
+
+.event-card {
+background: white;
+border: 1px solid var(–gray-200);
+border-radius: 10px;
+padding: 1rem 1.25rem;
+display: flex;
+align-items: center;
+gap: 1.25rem;
+cursor: pointer;
+transition: all 0.2s;
+box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.event-card:hover { border-color: var(–pink); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+
+.event-date {
+background: var(–pink);
+color: white;
+border-radius: 8px;
+width: 50px;
+text-align: center;
+padding: 0.4rem;
+flex-shrink: 0;
+}
+
+.event-date-month { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.event-date-day { font-size: 1.4rem; font-weight: 700; line-height: 1; }
+
+.event-body { flex: 1; }
+.event-title { font-size: 0.9rem; font-weight: 700; color: var(–black); margin-bottom: 0.2rem; }
+.event-meta { font-size: 0.75rem; color: var(–gray-400); }
+
+.event-type {
+font-size: 0.68rem;
+font-weight: 700;
+padding: 0.25rem 0.6rem;
+border-radius: 20px;
+text-transform: uppercase;
+letter-spacing: 0.07em;
+flex-shrink: 0;
+}
+.event-type.virtual { background: rgba(46,125,82,0.1); color: var(–green); }
+.event-type.in-person { background: rgba(194,24,91,0.1); color: var(–pink); }
+
+/* ── FOOTER ── */
+.site-footer {
+background: var(–black);
+color: var(–gray-400);
+padding: 2rem;
+margin-top: auto;
+font-size: 0.8rem;
+border-top: 3px solid var(–red);
+}
+
+.footer-inner {
+max-width: 1100px;
+margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+}
+
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-link { color: var(–gray-600); cursor: pointer; transition: color 0.2s; }
+.footer-link:hover { color: white; }
+
+/* ── TOAST ── */
+.toast {
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+background: var(–black);
+color: white;
+padding: 0.85rem 1.25rem;
+border-radius: 8px;
+font-size: 0.85rem;
+border-left: 4px solid var(–red);
+box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+transform: translateY(100px);
+opacity: 0;
+transition: all 0.3s ease;
+z-index: 9999;
+max-width: 320px;
+}
+
+.toast.visible {
+transform: translateY(0);
+opacity: 1;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+.persona-tiles { grid-template-columns: repeat(3, 1fr); }
+.section-cards { grid-template-columns: repeat(3, 1fr); }
+.content-cols.cols-3 { grid-template-columns: 1fr; }
+.use-case-grid { grid-template-columns: repeat(2, 1fr); }
+.persona-zones { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+.persona-tiles { grid-template-columns: repeat(2, 1fr); }
+.section-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* animations */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.page.active .hero-content,
+.page.active .section-hero,
+.page.active .section-body { animation: fadeUp 0.35s ease both; }
+</style>
+
+</head>
+<body>
+
+<!-- TOP NAV -->
+
+<nav class="topnav">
+  <a class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark">N</div>
+    <div>
+      <div class="nav-logo-text">AI Hub</div>
+      <div class="nav-logo-sub">NAB Enterprise</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-color="blue" onclick="showPage('tools')">Find a Tool</a>
+    <a class="nav-link" data-color="green" onclick="showPage('learn')">Learn &amp; Grow</a>
+    <a class="nav-link" data-color="purple" onclick="showPage('usecases')">Use Cases</a>
+    <a class="nav-link" data-color="amber" onclick="showPage('allowed')">What's Allowed</a>
+    <a class="nav-link" data-color="pink" onclick="showPage('involved')">Get Involved</a>
+  </div>
+  <div class="nav-search" onclick="focusSearch()">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search the AI Hub…" oninput="handleSearch(this.value)" onblur="closeSearch()" autocomplete="off">
+  </div>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-results">
+    <div class="search-results-header" id="searchResultsHeader">Showing results…</div>
+    <div id="searchResultsList"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: HOME -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">NAB Enterprise AI Program</div>
+      <h1 class="hero-title">Your <em>single entry point</em> for AI at NAB</h1>
+      <p class="hero-sub">Find tools, learn skills, explore what colleagues are doing with AI — and always know what's approved for your role.</p>
+      <div class="hero-prompt">Where would you like to start?</div>
+      <div class="persona-tiles">
+        <div class="persona-tile" style="--tile-color: #1D6FA4" onclick="showPage('persona-everyday')">
+          <div class="tile-icon">🧑‍💼</div>
+          <div class="tile-label">Everyday Colleague</div>
+          <div class="tile-sub">Getting started, everyday tools, what's available to you</div>
+        </div>
+        <div class="persona-tile" style="--tile-color: #2E7D52" onclick="showPage('persona-leader')">
+          <div class="tile-icon">👥</div>
+          <div class="tile-label">People Leader</div>
+          <div class="tile-sub">Lead your team's AI capability and adoption</div>
+        </div>
+        <div class="persona-tile" style="--tile-color: #D4760A" onclick="showPage('persona-risk')">
+          <div class="tile-icon">⚖️</div>
+          <div class="tile-label">Risk Professional</div>
+          <div class="tile-sub">Governance, frameworks, assurance and policy</div>
+        </div>
+        <div class="persona-tile" style="--tile-color: #6B3D9A" onclick="showPage('persona-tech')">
+          <div class="tile-icon">💻</div>
+          <div class="tile-label">Technologist &amp; Delivery Squad</div>
+          <div class="tile-sub">Specialist tooling, Cursor, technical resources</div>
+        </div>
+        <div class="persona-tile coming-soon" style="--tile-color: #888">
+          <div class="tile-icon">🏦</div>
+          <div class="tile-label">Bankers</div>
+          <div class="tile-sub">Client-facing AI resources</div>
+          <div class="tile-badge">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-sections">
+    <div class="home-sections-inner">
+      <div class="home-sections-title">Or explore by section</div>
+      <div class="section-cards">
+        <div class="section-card" onclick="showPage('tools')">
+          <div class="section-card-bar blue"></div>
+          <div class="section-card-body">
+            <div class="section-card-icon">🔧</div>
+            <div class="section-card-name">Find a Tool</div>
+            <div class="section-card-desc">Discover which AI tools are available and how to get access</div>
+          </div>
+        </div>
+        <div class="section-card" onclick="showPage('learn')">
+          <div class="section-card-bar green"></div>
+          <div class="section-card-body">
+            <div class="section-card-icon">📚</div>
+            <div class="section-card-name">Learn &amp; Grow</div>
+            <div class="section-card-desc">Learning pathways, prompting skills, and self-assessments</div>
+          </div>
+        </div>
+        <div class="section-card" onclick="showPage('usecases')">
+          <div class="section-card-bar purple"></div>
+          <div class="section-card-body">
+            <div class="section-card-icon">💡</div>
+            <div class="section-card-name">Use Cases</div>
+            <div class="section-card-desc">See what your colleagues are doing with AI across NAB</div>
+          </div>
+        </div>
+        <div class="section-card" onclick="showPage('allowed')">
+          <div class="section-card-bar amber"></div>
+          <div class="section-card-body">
+            <div class="section-card-icon">✅</div>
+            <div class="section-card-name">What's Allowed</div>
+            <div class="section-card-desc">Policies, acceptable use, and risk frameworks for AI</div>
+          </div>
+        </div>
+        <div class="section-card" onclick="showPage('involved')">
+          <div class="section-card-bar pink"></div>
+          <div class="section-card-body">
+            <div class="section-card-icon">🤝</div>
+            <div class="section-card-name">Get Involved</div>
+            <div class="section-card-desc">Events, champions network, and community programs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2025 National Australia Bank — AI Hub (Prototype Model)</span>
+      <div class="footer-links">
+        <span class="footer-link" onclick="showPage('allowed')">What's Allowed</span>
+        <span class="footer-link">Accessibility</span>
+        <span class="footer-link">Feedback</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: FIND A TOOL -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-tools">
+  <div class="section-hero blue">
+    <div class="section-inner">
+      <div class="section-eyebrow blue">Section 1</div>
+      <h1 class="section-title">Find a Tool</h1>
+      <p class="section-desc">Split by access level — serving every literacy level without confusion. Every tool page includes acceptable use guidance.</p>
+    </div>
+  </div>
+  <div class="section-body" style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="risk-callout">
+      <div class="risk-callout-icon">⚠️</div>
+      <div class="risk-callout-body">
+        <div class="risk-callout-title">Responsible AI — embedded here</div>
+        <div class="risk-callout-text">Every tool page includes an acceptable use section and any relevant risk guidance. Responsible AI is not a separate destination — it surfaces at the point of use.</div>
+      </div>
+    </div>
+    <div class="content-cols cols-3">
+      <div class="content-col">
+        <div class="col-header blue">🌐 Everyday Tools — Available to all</div>
+        <a class="col-item" onclick="toast('Microsoft Copilot page coming in SharePoint build')"><div class="item-dot blue"></div><span class="item-text">Microsoft Copilot</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Access guide page coming in SharePoint build')"><div class="item-dot blue"></div><span class="item-text">How to get access</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="showPage('learn')"><div class="item-dot blue"></div><span class="item-text">Prompting quick-start</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Before & after examples page coming')"><div class="item-dot blue"></div><span class="item-text">Before &amp; after examples</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Acceptable use for Copilot</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header blue-2">🔧 Specialist Tools — Role-based access</div>
+        <a class="col-item" onclick="toast('Cursor page — for Technologists & Delivery Squads')"><div class="item-dot blue-2"></div><span class="item-text">Cursor</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Access request process page coming')"><div class="item-dot blue-2"></div><span class="item-text">How to request access</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Technical documentation page coming')"><div class="item-dot blue-2"></div><span class="item-text">Technical documentation</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="showPage('usecases')"><div class="item-dot blue-2"></div><span class="item-text">Specialist use case examples</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Acceptable use for Cursor</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header green">🔍 Find by Need</div>
+        <a class="col-item" onclick="toast('Tools filtered by persona — filtered page coming')"><div class="item-dot green"></div><span class="item-text">Tools by persona</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Tools filtered by use case — coming')"><div class="item-dot green"></div><span class="item-text">Tools by use case</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Tools filtered by function — coming')"><div class="item-dot green"></div><span class="item-text">Tools by function / team</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Compare tools side-by-side — coming')"><div class="item-dot green"></div><span class="item-text">Compare tools</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Tool request form — existing process')"><div class="item-dot green"></div><span class="item-text">Request a new tool</span><span class="item-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: LEARN & GROW -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-learn">
+  <div class="section-hero green">
+    <div class="section-inner">
+      <div class="section-eyebrow green">Section 2</div>
+      <h1 class="section-title">Learn &amp; Grow</h1>
+      <p class="section-desc">Not just for beginners — signals ongoing value for every stage of your AI journey. Every pathway includes a Responsible AI module.</p>
+    </div>
+  </div>
+  <div class="section-body" style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="risk-callout">
+      <div class="risk-callout-icon">⚠️</div>
+      <div class="risk-callout-body">
+        <div class="risk-callout-title">Responsible AI — embedded here</div>
+        <div class="risk-callout-text">Every learning pathway includes a dedicated Responsible AI module. AI principles and what NAB stands for are surfaced in "Start Here" — not buried in governance.</div>
+      </div>
+    </div>
+    <div class="content-cols cols-3">
+      <div class="content-col">
+        <div class="col-header green">🚀 Start Here</div>
+        <a class="col-item" onclick="toast('What is AI? — foundational explainer page')"><div class="item-dot green"></div><span class="item-text">What is AI?</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('AI at NAB — our approach and strategy')"><div class="item-dot green"></div><span class="item-text">AI at NAB — our approach</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('AI readiness self-assessment — interactive tool')"><div class="item-dot green"></div><span class="item-text">How AI ready are you? (self-assessment)</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ AI principles — what we stand for</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header blue">📚 Learning Pathways</div>
+        <a class="col-item" onclick="toast('Foundations pathway — all staff')"><div class="item-dot blue"></div><span class="item-text">Foundations (all staff)</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="showPage('persona-leader')"><div class="item-dot blue"></div><span class="item-text">For People Leaders</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="showPage('persona-risk')"><div class="item-dot blue"></div><span class="item-text">For Risk Professionals</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="showPage('persona-tech')"><div class="item-dot blue"></div><span class="item-text">For Technologists</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Responsible AI module (all pathways)</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header purple">✍️ Prompting &amp; Skills</div>
+        <a class="col-item" onclick="toast('Prompting basics — foundational guide')"><div class="item-dot purple"></div><span class="item-text">Prompting basics</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Prompting by role — filtered by persona')"><div class="item-dot purple"></div><span class="item-text">Prompting by role</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Before & after examples — real colleague outputs')"><div class="item-dot purple"></div><span class="item-text">Before &amp; after examples</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Learning modules — links to external learning platform')"><div class="item-dot purple"></div><span class="item-text">Learning modules (linked)</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Prompt risk awareness</span><span class="item-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: USE CASES -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-usecases">
+  <div class="section-hero purple">
+    <div class="section-inner">
+      <div class="section-eyebrow purple">Section 3</div>
+      <h1 class="section-title">Use Cases</h1>
+      <p class="section-desc">The highest-value adoption driver. Seeing a real peer use case changes behaviour more than any module. All submissions include risk tagging.</p>
+    </div>
+  </div>
+  <div class="section-body" style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="risk-callout">
+      <div class="risk-callout-icon">⚠️</div>
+      <div class="risk-callout-body">
+        <div class="risk-callout-title">Responsible AI — embedded here</div>
+        <div class="risk-callout-text">All use case submissions require risk tagging. Every published use case displays relevant risk considerations. This ensures colleagues see both the opportunity and the guardrails together.</div>
+      </div>
+    </div>
+
+```
+<div class="tabs">
+  <div class="tab active purple" onclick="switchTab(this, 'uc-browse')">Browse Use Cases</div>
+  <div class="tab" onclick="switchTab(this, 'uc-submit')">Submit a Use Case</div>
+</div>
+
+<div class="tab-panel active" id="uc-browse">
+  <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+    <select class="form-select" style="width:auto;min-width:160px">
+      <option>All personas</option>
+      <option>Everyday Colleague</option>
+      <option>People Leader</option>
+      <option>Risk Professional</option>
+      <option>Technologist</option>
+    </select>
+    <select class="form-select" style="width:auto;min-width:160px">
+      <option>All tools</option>
+      <option>Microsoft Copilot</option>
+      <option>Cursor</option>
+    </select>
+    <select class="form-select" style="width:auto;min-width:180px">
+      <option>All functions</option>
+      <option>People & Culture</option>
+      <option>Technology</option>
+      <option>Risk & Compliance</option>
+      <option>Retail Banking</option>
+    </select>
+  </div>
+  <div class="use-case-grid">
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">People & Culture · People Leader</div>
+        <div class="uc-title">Drafting team AI readiness plans using Copilot</div>
+        <div class="uc-desc">A P&C leader used Copilot to synthesise survey data and draft personalised team capability plans, cutting prep time by 60%.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Copilot</span>
+          <span class="uc-tag risk">⚠️ Data classification reviewed</span>
+        </div>
+      </div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">Technology · Technologist</div>
+        <div class="uc-title">Accelerating code review cycles with Cursor</div>
+        <div class="uc-desc">A delivery squad integrated Cursor into their PR process, reducing review time and surfacing potential issues earlier.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Cursor</span>
+          <span class="uc-tag risk">⚠️ Code security review applied</span>
+        </div>
+      </div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">Risk & Compliance · Risk Professional</div>
+        <div class="uc-title">Summarising regulatory updates with Copilot</div>
+        <div class="uc-desc">A risk team colleague used Copilot to summarise lengthy APRA updates into structured briefs for the leadership team.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Copilot</span>
+          <span class="uc-tag risk">⚠️ Human review mandatory</span>
+        </div>
+      </div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">Retail Banking · Everyday Colleague</div>
+        <div class="uc-title">Writing clearer customer communications</div>
+        <div class="uc-desc">Branch colleagues used Copilot to rewrite standard letters into plain English, improving customer satisfaction scores.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Copilot</span>
+          <span class="uc-tag risk">⚠️ Customer data not input to AI</span>
+        </div>
+      </div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">People & Culture · Everyday Colleague</div>
+        <div class="uc-title">Streamlining meeting notes and action items</div>
+        <div class="uc-desc">Teams across NAB are using Copilot in Microsoft Teams to auto-summarise meetings and generate action item lists.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Copilot</span>
+          <span class="uc-tag risk">⚠️ Review before distributing</span>
+        </div>
+      </div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-bar"></div>
+      <div class="uc-body">
+        <div class="uc-persona">Technology · Delivery Squad</div>
+        <div class="uc-title">Generating test data and documentation</div>
+        <div class="uc-desc">Squad used AI to generate synthetic test data sets and auto-draft technical documentation, saving sprint capacity.</div>
+        <div class="uc-tags">
+          <span class="uc-tag tool">Cursor</span>
+          <span class="uc-tag risk">⚠️ Synthetic data only — reviewed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="uc-submit">
+  <div class="info-banner" style="margin-bottom:1.5rem">
+    <div class="info-banner-icon">📋</div>
+    <div>This form carries across the existing use case submission process. The team that currently manages submissions continues to own this process.</div>
+  </div>
+  <div style="max-width:580px">
+    <div class="form-group">
+      <label class="form-label">Use case title</label>
+      <input class="form-input" type="text" placeholder="e.g. Summarising regulatory updates with Copilot">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your persona / role</label>
+      <select class="form-select">
+        <option value="">Select your primary persona</option>
+        <option>Everyday Colleague</option>
+        <option>People Leader</option>
+        <option>Risk Professional</option>
+        <option>Technologist / Delivery Squad</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tool used</label>
+      <select class="form-select">
+        <option value="">Select tool</option>
+        <option>Microsoft Copilot</option>
+        <option>Cursor</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Describe the use case</label>
+      <textarea class="form-textarea" placeholder="What problem were you solving? What did you do? What was the outcome?"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">⚠️ Risk tagging (required)</label>
+      <select class="form-select">
+        <option value="">Select the risk consideration that applies</option>
+        <option>No personal or customer data was used</option>
+        <option>Data classification reviewed and approved</option>
+        <option>Human review applied before output was used</option>
+        <option>Output is internal only — not customer-facing</option>
+        <option>Other (describe in notes)</option>
+      </select>
+    </div>
+    <button class="btn btn-purple" onclick="toast('Use case submitted! The team will review and publish shortly.')">Submit Use Case →</button>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: WHAT'S ALLOWED -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-allowed">
+  <div class="section-hero amber">
+    <div class="section-inner">
+      <div class="section-eyebrow amber">Section 4</div>
+      <h1 class="section-title">What's Allowed</h1>
+      <p class="section-desc">Elevated from "Help & Governance" — language chosen for a general workforce. If your first question is "is this allowed?", this is where you come.</p>
+    </div>
+  </div>
+  <div class="section-body" style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="info-banner">
+      <div class="info-banner-icon">⚠️</div>
+      <div><strong>Risk team direction:</strong> AI risk frameworks are not siloed here — they surface throughout every section of the hub. This section is your authoritative reference point, not the only place you'll encounter responsible AI guidance.</div>
+    </div>
+    <div class="content-cols cols-3">
+      <div class="content-col">
+        <div class="col-header amber">📋 Policies &amp; Principles</div>
+        <a class="col-item" onclick="toast('Acceptable Use Policy — full document')"><div class="item-dot amber"></div><span class="item-text">Acceptable Use Policy</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('AI at NAB — policy & safety (source of truth)')"><div class="item-dot amber"></div><span class="item-text">AI at NAB — policy &amp; safety</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Responsible AI principles — NAB\'s commitments')"><div class="item-dot amber"></div><span class="item-text">Responsible AI principles</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('All policies include last-updated date and version number')"><div class="item-dot amber"></div><span class="item-text">Policy versioning &amp; last updated</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header amber-2">🔧 By Tool</div>
+        <a class="col-item" onclick="toast('Copilot — full acceptable use guidance')"><div class="item-dot amber-2"></div><span class="item-text">Copilot — what's allowed</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Cursor — acceptable use for approved roles')"><div class="item-dot amber-2"></div><span class="item-text">Cursor — what's allowed</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Tool-specific guidance dropdown — all tools')"><div class="item-dot amber-2"></div><span class="item-text">All tools — guidance dropdown</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Report a tool issue — escalation process')"><div class="item-dot amber-2"></div><span class="item-text">Report a tool issue</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header" style="background:#B05A00">🛡️ Risk &amp; Escalation</div>
+        <a class="col-item" onclick="toast('AI Risk Framework — full framework document')"><div class="item-dot" style="background:#B05A00"></div><span class="item-text">AI Risk Framework</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('AI Risk Assessment process — how to assess')"><div class="item-dot" style="background:#B05A00"></div><span class="item-text">AI Risk Assessment process</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Raise a concern — confidential reporting pathway')"><div class="item-dot" style="background:#B05A00"></div><span class="item-text">Raise a concern</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Escalation contacts — named risk team contacts')"><div class="item-dot" style="background:#B05A00"></div><span class="item-text">Escalation contacts</span><span class="item-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PAGE: GET INVOLVED -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-involved">
+  <div class="section-hero pink">
+    <div class="section-inner">
+      <div class="section-eyebrow pink">Section 5</div>
+      <h1 class="section-title">Get Involved</h1>
+      <p class="section-desc">Community, events, and programs to deepen your AI capability and connect with colleagues doing interesting things with AI across NAB.</p>
+    </div>
+  </div>
+  <div class="section-body" style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="risk-callout">
+      <div class="risk-callout-icon">⚠️</div>
+      <div class="risk-callout-body">
+        <div class="risk-callout-title">Responsible AI — embedded here</div>
+        <div class="risk-callout-text">The Copilot Champions program includes Responsible AI as a core competency. Community members are ambassadors for safe and effective AI use, not just adoption advocates.</div>
+      </div>
+    </div>
+    <div class="content-cols cols-3" style="margin-bottom:2rem">
+      <div class="content-col">
+        <div class="col-header pink">📅 Events</div>
+        <a class="col-item" onclick="toast('Upcoming events — full calendar view')"><div class="item-dot pink"></div><span class="item-text">Upcoming events</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Tech Academy events — external link')"><div class="item-dot pink"></div><span class="item-text">Tech Academy events</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('CoP / Learning events — community of practice')"><div class="item-dot pink"></div><span class="item-text">CoP / Learning events</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Monthly Program Showcase — register')"><div class="item-dot pink"></div><span class="item-text">Monthly Program Showcase</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header" style="background:#AD1457">🤝 Community</div>
+        <a class="col-item" onclick="toast('Copilot Champions — meet the network')"><div class="item-dot" style="background:#AD1457"></div><span class="item-text">Copilot Champions</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Connect with AI Experts — office hours and contacts')"><div class="item-dot" style="background:#AD1457"></div><span class="item-text">Connect with AI Experts</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Yammer / Viva Engage — AI community groups')"><div class="item-dot" style="background:#AD1457"></div><span class="item-text">Yammer / Viva Engage groups</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Champion application form — join the program')"><div class="item-dot" style="background:#AD1457"></div><span class="item-text">Become a Champion</span><span class="item-arrow">→</span></a>
+        <a class="col-item risk-item" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Responsible AI as champion competency</span><span class="item-arrow">→</span></a>
+      </div>
+      <div class="content-col">
+        <div class="col-header" style="background:#880E4F">📣 Stay Informed</div>
+        <a class="col-item" onclick="toast('Newsletter / AI Hub updates — subscribe')"><div class="item-dot" style="background:#880E4F"></div><span class="item-text">Newsletter &amp; updates</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('In-team session resources — request a session')"><div class="item-dot" style="background:#880E4F"></div><span class="item-text">In-team session resources</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Community forums — Viva Engage link')"><div class="item-dot" style="background:#880E4F"></div><span class="item-text">Forums</span><span class="item-arrow">→</span></a>
+        <a class="col-item" onclick="toast('Feedback form — help us improve the hub')"><div class="item-dot" style="background:#880E4F"></div><span class="item-text">Feedback on the hub</span><span class="item-arrow">→</span></a>
+      </div>
+    </div>
+
+```
+<h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;color:var(--black)">Upcoming Events</h3>
+<div class="event-list">
+  <div class="event-card">
+    <div class="event-date"><div class="event-date-month">Jun</div><div class="event-date-day">5</div></div>
+    <div class="event-body">
+      <div class="event-title">AI Hub Launch — All Colleague Showcase</div>
+      <div class="event-meta">1:00 PM AEST · Microsoft Teams · 45 min</div>
+    </div>
+    <div class="event-type virtual">Virtual</div>
+  </div>
+  <div class="event-card">
+    <div class="event-date"><div class="event-date-month">Jun</div><div class="event-date-day">12</div></div>
+    <div class="event-body">
+      <div class="event-title">Copilot Champions Meetup — Melbourne</div>
+      <div class="event-meta">12:00 PM AEST · 800 Bourke St, Docklands · 90 min</div>
+    </div>
+    <div class="event-type in-person">In Person</div>
+  </div>
+  <div class="event-card">
+    <div class="event-date"><div class="event-date-month">Jun</div><div class="event-date-day">19</div></div>
+    <div class="event-body">
+      <div class="event-title">Monthly Program Showcase — June Edition</div>
+      <div class="event-meta">2:00 PM AEST · Microsoft Teams · 60 min</div>
+    </div>
+    <div class="event-type virtual">Virtual</div>
+  </div>
+  <div class="event-card">
+    <div class="event-date"><div class="event-date-month">Jul</div><div class="event-date-day">3</div></div>
+    <div class="event-body">
+      <div class="event-title">Tech Academy — Responsible AI Workshop</div>
+      <div class="event-meta">9:00 AM AEST · 700 Bourke St, Melbourne · Half day</div>
+    </div>
+    <div class="event-type in-person">In Person</div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PERSONA: EVERYDAY COLLEAGUE -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-persona-everyday">
+  <div class="persona-hero">
+    <div class="persona-hero-inner">
+      <div>
+        <div class="section-eyebrow red" style="margin-bottom:0.5rem">🧑‍💼 Persona Hub</div>
+        <div class="persona-hero-title">Everyday Colleague</div>
+        <div class="persona-hero-sub">Everything you need to start using AI at NAB confidently — tools available to you, how to use them, and what's approved.</div>
+      </div>
+      <div class="also-relevant">
+        <div class="also-relevant-label">Also relevant for you →</div>
+        <div class="also-relevant-links">
+          <div class="also-relevant-link" onclick="showPage('persona-leader')">People Leader</div>
+          <div class="also-relevant-link" onclick="showPage('persona-risk')">Risk Professional</div>
+          <div class="also-relevant-link" onclick="showPage('persona-tech')">Technologist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="back-btn" onclick="showPage('home')">← Back to home</div>
+    <div class="persona-zones">
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--blue)">⭐ Your Essentials</div>
+        <div class="zone-body">
+          <p>The most important AI resources for everyday colleagues at NAB — start here.</p>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="showPage('tools')"><div class="item-dot blue"></div><span class="item-text">Get access to Microsoft Copilot</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="showPage('learn')"><div class="item-dot blue"></div><span class="item-text">Prompting quick-start guide</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200)" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ What's allowed for your role</span><span class="item-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--green)">📚 Learn for Your Role</div>
+        <div class="zone-body">
+          <p>Your learning pathway includes a Foundations module and a Responsible AI module — both relevant regardless of your function.</p>
+          <span class="zone-link green" onclick="showPage('learn')">Start Foundations pathway →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--purple)">💡 Use Cases for Your Work</div>
+        <div class="zone-body">
+          <p>See what colleagues in similar roles are doing with AI — from writing communications to summarising meetings.</p>
+          <span class="zone-link purple" onclick="showPage('usecases')">Browse use cases →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--amber)">⚖️ What's Allowed for You</div>
+        <div class="zone-body">
+          <p>The Acceptable Use Policy and tool-specific guidance for Copilot are most relevant to everyday colleagues. Always check before using AI on new types of work.</p>
+          <span class="zone-link amber" onclick="showPage('allowed')">Check what's allowed →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--pink)">🤝 Your Community</div>
+        <div class="zone-body">
+          <p>Join your local Copilot Champions network, sign up for the monthly showcase, or attend an in-team session.</p>
+          <span class="zone-link pink" onclick="showPage('involved')">Get involved →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--gray-600)">📘 Also Relevant for You</div>
+        <div class="zone-body">
+          <p>Do you wear multiple hats? Navigate to the persona hub that best matches your other role.</p>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.5rem">
+            <span class="zone-link green" onclick="showPage('persona-leader')">→ People Leader hub</span>
+            <span class="zone-link amber" onclick="showPage('persona-risk')">→ Risk Professional hub</span>
+            <span class="zone-link purple" onclick="showPage('persona-tech')">→ Technologist hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PERSONA: PEOPLE LEADER -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-persona-leader">
+  <div class="persona-hero" style="border-bottom-color:var(--green)">
+    <div class="persona-hero-inner">
+      <div>
+        <div class="section-eyebrow green" style="margin-bottom:0.5rem">👥 Persona Hub</div>
+        <div class="persona-hero-title">People Leader</div>
+        <div class="persona-hero-sub">Resources to build your team's AI capability, lead adoption conversations, and understand what AI means for how your team works.</div>
+      </div>
+      <div class="also-relevant">
+        <div class="also-relevant-label">Also relevant for you →</div>
+        <div class="also-relevant-links">
+          <div class="also-relevant-link" onclick="showPage('persona-everyday')">Everyday Colleague</div>
+          <div class="also-relevant-link" onclick="showPage('persona-risk')">Risk Professional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="back-btn" onclick="showPage('home')">← Back to home</div>
+    <div class="persona-zones">
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--green)">⭐ Your Essentials</div>
+        <div class="zone-body">
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="toast('How AI ready is your team? — self-assessment for leaders')"><div class="item-dot green"></div><span class="item-text">How AI ready is your team?</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="showPage('tools')"><div class="item-dot green"></div><span class="item-text">Tools your team can access</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200)" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Your governance responsibilities</span><span class="item-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--blue)">📚 Learn for Your Role</div>
+        <div class="zone-body">
+          <p>Your pathway covers how to lead capability-building conversations, coach team members on AI use, and model responsible AI behaviours.</p>
+          <span class="zone-link blue" onclick="showPage('learn')">People Leader pathway →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--purple)">💡 Use Cases for Your Work</div>
+        <div class="zone-body">
+          <p>See how other people leaders are using AI to run better team meetings, develop capability plans, and improve communications.</p>
+          <span class="zone-link purple" onclick="showPage('usecases')">Browse leadership use cases →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--amber)">⚖️ What's Allowed for You</div>
+        <div class="zone-body">
+          <p>As a people leader you have a responsibility to ensure your team uses AI in line with NAB policy. Understand what your oversight role looks like.</p>
+          <span class="zone-link amber" onclick="showPage('allowed')">Leader governance guide →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--pink)">🤝 Your Community</div>
+        <div class="zone-body">
+          <p>Connect with other people leaders navigating AI adoption. Monthly Program Showcase is especially relevant for you.</p>
+          <span class="zone-link pink" onclick="showPage('involved')">Explore events →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--gray-600)">📘 Also Relevant for You</div>
+        <div class="zone-body">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.5rem">
+            <span class="zone-link blue" onclick="showPage('persona-everyday')">→ Everyday Colleague hub</span>
+            <span class="zone-link amber" onclick="showPage('persona-risk')">→ Risk Professional hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PERSONA: RISK PROFESSIONAL -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-persona-risk">
+  <div class="persona-hero" style="border-bottom-color:var(--amber)">
+    <div class="persona-hero-inner">
+      <div>
+        <div class="section-eyebrow amber" style="margin-bottom:0.5rem">⚖️ Persona Hub</div>
+        <div class="persona-hero-title">Risk Professional</div>
+        <div class="persona-hero-sub">AI governance, risk frameworks, and assurance resources — and a reminder that responsible AI guidance surfaces throughout the entire hub, not just here.</div>
+      </div>
+      <div class="also-relevant">
+        <div class="also-relevant-label">Also relevant for you →</div>
+        <div class="also-relevant-links">
+          <div class="also-relevant-link" onclick="showPage('persona-everyday')">Everyday Colleague</div>
+          <div class="also-relevant-link" onclick="showPage('persona-leader')">People Leader</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="back-btn" onclick="showPage('home')">← Back to home</div>
+    <div class="risk-callout">
+      <div class="risk-callout-icon">⚠️</div>
+      <div class="risk-callout-body">
+        <div class="risk-callout-title">Risk frameworks are embedded across the whole hub — not just here</div>
+        <div class="risk-callout-text">Per risk team direction, AI risk frameworks surface at the point of relevance in every section — tool pages, learning pathways, use case submissions, and community activities. This hub is designed so that every colleague encounters responsible AI guidance, not just risk professionals seeking it out.</div>
+      </div>
+    </div>
+    <div class="persona-zones">
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--amber)">⭐ Your Essentials</div>
+        <div class="zone-body">
+          <div class="col-item" style="border-radius:6px;border:1px solid #E8C84A;background:#FFF8E1;margin-bottom:0.4rem" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">AI Risk Framework</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid #E8C84A;background:#FFF8E1;margin-bottom:0.4rem" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">AI Risk Assessment process</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid #E8C84A;background:#FFF8E1" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">Acceptable Use Policy</span><span class="item-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--blue)">📚 Learn for Your Role</div>
+        <div class="zone-body">
+          <p>Your dedicated learning pathway covers AI risk assessment, CPS 230 context, EU AI Act implications for NAB, and governance responsibilities.</p>
+          <span class="zone-link blue" onclick="showPage('learn')">Risk Professional pathway →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--purple)">💡 Use Cases for Your Work</div>
+        <div class="zone-body">
+          <p>See how risk and compliance colleagues are using AI to process regulatory updates, conduct research, and improve reporting efficiency.</p>
+          <span class="zone-link purple" onclick="showPage('usecases')">Browse risk use cases →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--amber)">⚖️ Full Governance Reference</div>
+        <div class="zone-body">
+          <p>The What's Allowed section is your authoritative reference for all AI policy, tool-specific guidance, and escalation pathways.</p>
+          <span class="zone-link amber" onclick="showPage('allowed')">Go to What's Allowed →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--pink)">🤝 Your Community</div>
+        <div class="zone-body">
+          <p>Connect with the AI governance and assurance community across NAB. Responsible AI competency is a core part of the Champions program.</p>
+          <span class="zone-link pink" onclick="showPage('involved')">Get involved →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--gray-600)">📘 Also Relevant for You</div>
+        <div class="zone-body">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.5rem">
+            <span class="zone-link blue" onclick="showPage('persona-everyday')">→ Everyday Colleague hub</span>
+            <span class="zone-link green" onclick="showPage('persona-leader')">→ People Leader hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+
+<!-- PERSONA: TECHNOLOGIST -->
+
+<!-- ══════════════════════════════════════════ -->
+
+<div class="page" id="page-persona-tech">
+  <div class="persona-hero" style="border-bottom-color:var(--purple)">
+    <div class="persona-hero-inner">
+      <div>
+        <div class="section-eyebrow purple" style="margin-bottom:0.5rem">💻 Persona Hub</div>
+        <div class="persona-hero-title">Technologist &amp; Delivery Squad</div>
+        <div class="persona-hero-sub">Specialist tools, technical documentation, and delivery-focused resources — including Cursor and everything you need to build responsibly.</div>
+      </div>
+      <div class="also-relevant">
+        <div class="also-relevant-label">Also relevant for you →</div>
+        <div class="also-relevant-links">
+          <div class="also-relevant-link" onclick="showPage('persona-everyday')">Everyday Colleague</div>
+          <div class="also-relevant-link" onclick="showPage('persona-risk')">Risk Professional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+    <div class="back-btn" onclick="showPage('home')">← Back to home</div>
+    <div class="persona-zones">
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--purple)">⭐ Your Essentials</div>
+        <div class="zone-body">
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="showPage('tools')"><div class="item-dot purple"></div><span class="item-text">Cursor — access &amp; documentation</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid var(--gray-200);margin-bottom:0.4rem" onclick="showPage('tools')"><div class="item-dot purple"></div><span class="item-text">All specialist tools</span><span class="item-arrow">→</span></div>
+          <div class="col-item" style="border-radius:6px;border:1px solid #E8C84A;background:#FFF8E1" onclick="showPage('allowed')"><div class="item-dot amber"></div><span class="item-text risk-text">⚠️ Acceptable use for specialist tools</span><span class="item-arrow">→</span></div>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--blue)">📚 Learn for Your Role</div>
+        <div class="zone-body">
+          <p>Your pathway covers advanced AI tooling, prompt engineering for development, responsible AI in code generation, and staying across the AI tooling landscape.</p>
+          <span class="zone-link blue" onclick="showPage('learn')">Technologist pathway →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--purple)">💡 Use Cases for Your Work</div>
+        <div class="zone-body">
+          <p>See how delivery squads are using Cursor and other AI tools to accelerate code review, generate documentation, and ship faster.</p>
+          <span class="zone-link purple" onclick="showPage('usecases')">Browse technologist use cases →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--amber)">⚖️ What's Allowed for You</div>
+        <div class="zone-body">
+          <p>Specialist tool acceptable use policies, code security review requirements, and synthetic data guidance are all here.</p>
+          <span class="zone-link amber" onclick="showPage('allowed')">Technical governance guide →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--pink)">🤝 Your Community</div>
+        <div class="zone-body">
+          <p>Tech Academy events, delivery-focused AI forums, and the broader AI community at NAB.</p>
+          <span class="zone-link pink" onclick="showPage('involved')">Get involved →</span>
+        </div>
+      </div>
+      <div class="persona-zone">
+        <div class="zone-header" style="background:var(--gray-600)">📘 Also Relevant for You</div>
+        <div class="zone-body">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.5rem">
+            <span class="zone-link blue" onclick="showPage('persona-everyday')">→ Everyday Colleague hub</span>
+            <span class="zone-link amber" onclick="showPage('persona-risk')">→ Risk Professional hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── Page routing ──
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + id);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    // Update nav active state
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const map = { tools: 0, learn: 1, usecases: 2, allowed: 3, involved: 4 };
+    if (map[id] !== undefined) {
+      document.querySelectorAll('.nav-link')[map[id]].classList.add('active');
+    } else {
+      // clear all
+    }
+  }
+
+  // ── Tabs ──
+  function switchTab(el, panelId) {
+    const tabs = el.parentElement.querySelectorAll('.tab');
+    tabs.forEach(t => { t.classList.remove('active', 'blue', 'green', 'purple', 'amber', 'pink'); });
+    el.classList.add('active', 'purple');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  // ── Toast ──
+  let toastTimer;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('visible'), 3500);
+  }
+
+  // ── Search ──
+  const searchData = [
+    { title: 'Microsoft Copilot', section: 'Find a Tool', page: 'tools', icon: '🌐', bg: '#EBF4FB' },
+    { title: 'Cursor', section: 'Find a Tool — Specialist Tools', page: 'tools', icon: '🔧', bg: '#EBF4FB' },
+    { title: 'How to get access', section: 'Find a Tool', page: 'tools', icon: '🔑', bg: '#EBF4FB' },
+    { title: 'What is AI?', section: 'Learn & Grow — Start Here', page: 'learn', icon: '🤖', bg: '#EDF7F1' },
+    { title: 'Learning Pathways', section: 'Learn & Grow', page: 'learn', icon: '📚', bg: '#EDF7F1' },
+    { title: 'Prompting basics', section: 'Learn & Grow — Prompting & Skills', page: 'learn', icon: '✍️', bg: '#EDF7F1' },
+    { title: 'AI readiness self-assessment', section: 'Learn & Grow', page: 'learn', icon: '📊', bg: '#EDF7F1' },
+    { title: 'Browse use cases', section: 'Use Cases', page: 'usecases', icon: '💡', bg: '#F3EDF9' },
+    { title: 'Submit a use case', section: 'Use Cases', page: 'usecases', icon: '📤', bg: '#F3EDF9' },
+    { title: 'Acceptable Use Policy', section: "What's Allowed", page: 'allowed', icon: '📋', bg: '#FDF6E8' },
+    { title: 'AI Risk Framework', section: "What's Allowed — Risk & Escalation", page: 'allowed', icon: '🛡️', bg: '#FDF6E8' },
+    { title: 'Is this allowed?', section: "What's Allowed", page: 'allowed', icon: '✅', bg: '#FDF6E8' },
+    { title: 'Raise a concern', section: "What's Allowed", page: 'allowed', icon: '🚨', bg: '#FDF6E8' },
+    { title: 'Copilot Champions', section: 'Get Involved — Community', page: 'involved', icon: '🏆', bg: '#FCE8F0' },
+    { title: 'Upcoming events', section: 'Get Involved', page: 'involved', icon: '📅', bg: '#FCE8F0' },
+    { title: 'Become a Champion', section: 'Get Involved', page: 'involved', icon: '🤝', bg: '#FCE8F0' },
+    { title: 'Everyday Colleague hub', section: 'Persona Hub', page: 'persona-everyday', icon: '🧑‍💼', bg: '#F5F5F5' },
+    { title: 'People Leader hub', section: 'Persona Hub', page: 'persona-leader', icon: '👥', bg: '#F5F5F5' },
+    { title: 'Risk Professional hub', section: 'Persona Hub', page: 'persona-risk', icon: '⚖️', bg: '#F5F5F5' },
+    { title: 'Technologist hub', section: 'Persona Hub', page: 'persona-tech', icon: '💻', bg: '#F5F5F5' },
+    { title: 'Responsible AI principles', section: "What's Allowed", page: 'allowed', icon: '⚖️', bg: '#FDF6E8' },
+    { title: 'Tech Academy events', section: 'Get Involved', page: 'involved', icon: '🎓', bg: '#FCE8F0' },
+  ];
+
+  function handleSearch(val) {
+    const overlay = document.getElementById('searchOverlay');
+    const list = document.getElementById('searchResultsList');
+    const header = document.getElementById('searchResultsHeader');
+
+    if (!val.trim()) { overlay.classList.remove('visible'); return; }
+
+    const q = val.toLowerCase();
+    const results = searchData.filter(d =>
+      d.title.toLowerCase().includes(q) || d.section.toLowerCase().includes(q)
+    ).slice(0, 8);
+
+    header.textContent = results.length > 0
+      ? `${results.length} result${results.length !== 1 ? 's' : ''} for "${val}"`
+      : `No results found for "${val}"`;
+
+    list.innerHTML = results.length === 0
+      ? `<div style="padding:1.5rem;text-align:center;color:#999;font-size:0.875rem">Try searching for "Copilot", "risk framework", or "events"</div>`
+      : results.map(r => `
+        <div class="search-result-item" onmousedown="showPage('${r.page}');closeSearch()">
+          <div class="result-icon" style="background:${r.bg}">${r.icon}</div>
+          <div>
+            <div class="result-title">${r.title}</div>
+            <div class="result-section">${r.section}</div>
+          </div>
+        </div>
+      `).join('');
+
+    overlay.classList.add('visible');
+  }
+
+  function closeSearch() {
+    setTimeout(() => {
+      document.getElementById('searchOverlay').classList.remove('visible');
+      document.getElementById('searchInput').value = '';
+    }, 150);
+  }
+
+  function focusSearch() {
+    document.getElementById('searchInput').focus();
+  }
+
+  // Close search on escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSearch();
+  });
+</script>
+
+</body>
+</html>
